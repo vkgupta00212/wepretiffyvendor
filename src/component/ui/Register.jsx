@@ -1,21 +1,22 @@
 import { useState, useEffect, useRef } from "react";
 import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import RegisterUser from "../../backend/authentication/register";
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
     address: "",
-    aadhaarFront: null,
-    aadhaarBack: null,
+    aadhaarFront: "",
+    aadhaarBack: "",
   });
   const [errors, setErrors] = useState({});
   const [previewFront, setPreviewFront] = useState(null);
   const [previewBack, setPreviewBack] = useState(null);
   const formRef = useRef(null);
   const navigate = useNavigate();
+  const phone = localStorage.getItem("userPhone");
 
   // Focus trap for accessibility
   useEffect(() => {
@@ -68,17 +69,15 @@ const RegisterPage = () => {
     if (!formData.name.trim()) newErrors.name = "Name is required";
     if (!formData.email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/))
       newErrors.email = "Valid email is required";
-    if (!formData.phone.match(/^\d{10}$/))
-      newErrors.phone = "Valid 10-digit phone number is required";
     if (!formData.address.trim()) newErrors.address = "Address is required";
-    if (!formData.aadhaarFront)
-      newErrors.aadhaarFront = "Aadhaar front image is required";
-    if (!formData.aadhaarBack)
-      newErrors.aadhaarBack = "Aadhaar back image is required";
+    // if (!formData.aadhaarFront)
+    //   newErrors.aadhaarFront = "Aadhaar front image is required";
+    // if (!formData.aadhaarBack)
+    //   newErrors.aadhaarBack = "Aadhaar back image is required";
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
@@ -86,10 +85,30 @@ const RegisterPage = () => {
       return;
     }
     setErrors({});
-    console.log("Form submitted:", formData);
-    // Placeholder for API call, e.g., axios.post('/register', formData)
-    // Navigate to a success page or home after submission
-    navigate("/");
+
+    try {
+      const result = await RegisterUser(
+        formData.name,
+        formData.email,
+        phone,
+        "",
+        formData.address,
+        "",
+        ""
+      );
+
+      console.log("Register API Response:", result);
+
+      if (result) {
+        alert("Registered successfully!");
+        navigate("/"); // Redirect after success
+      } else {
+        alert("Registration failed, please try again.");
+      }
+    } catch (error) {
+      console.error("Submit Error:", error);
+      alert("An error occurred during registration.");
+    }
   };
 
   return (
@@ -146,24 +165,6 @@ const RegisterPage = () => {
             />
             {errors.email && (
               <p className="mt-1 text-sm text-red-600">{errors.email}</p>
-            )}
-          </div>
-
-          {/* Phone */}
-          <div>
-            <label className="block text-sm font-medium text-indigo-600">
-              Phone
-            </label>
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              placeholder="Enter your 10-digit phone number"
-            />
-            {errors.phone && (
-              <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
             )}
           </div>
 

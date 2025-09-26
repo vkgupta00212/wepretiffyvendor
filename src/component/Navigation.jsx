@@ -211,11 +211,11 @@ const Navigation = () => {
                           ? `https://api.weprettify.com/images/${user[0].Image}`
                           : "https://via.placeholder.com/150?text=Avatar"
                       }
-                      alt={user[0]?.Fullname || "Profile"}
+                      alt={user[0]?.fullname || "Profile"}
                       className="w-11 h-11 rounded-full border-2 border-gray-200 group-hover:border-indigo-400 transition-all duration-300"
                     />
                     <span className="text-base font-medium text-gray-700 group-hover:text-indigo-600 transition-colors duration-300">
-                      {user[0]?.Fullname || ""}
+                      {user[0]?.fullname || ""}
                     </span>
                     <ChevronDown
                       className={`w-5 h-5 text-gray-500 group-hover:text-indigo-600 transition-all duration-300 ${

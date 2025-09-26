@@ -9,8 +9,8 @@ class GetWalletModel {
 
   static fromJson(json) {
     return new GetWalletModel(
-      json.id || 0,
-      json.WalletBalance || "0",
+      json.ID || 0,
+      json.Balance || "0",
       json.Phone || ""
     );
   }
@@ -23,7 +23,7 @@ const GetWallet = async (phone) => {
 
   try {
     const response = await axios.post(
-      "https://api.weprettify.com/APIs/APIs.asmx/GetWallet",
+      "https://api.weprettify.com/APIs/APIs.asmx/ShowWalletVendors",
       formData,
       { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
     );

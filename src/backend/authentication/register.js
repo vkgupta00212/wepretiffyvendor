@@ -2,27 +2,28 @@
 import axios from "axios";
 
 const RegisterUser = async (
-  Image,
-  Type,
   Fullname,
-  Phone,
   Email,
-  Gender,
-  Dob
+  Phone,
+  Dob,
+  Address,
+  AdharFront,
+  AdharBack
 ) => {
   const formData = new URLSearchParams();
   formData.append("token", "SWNCMPMSREMXAMCKALVAALI");
-  formData.append("image", Image || "");
-  formData.append("type", Type || "");
-  formData.append("fullname", Fullname || "");
-  formData.append("phone", Phone || "");
-  formData.append("email", Email || "");
-  formData.append("gender", Gender || "");
-  formData.append("dob", Dob || "");
+  formData.append("FullName", Fullname || "");
+  formData.append("Email", Email || "");
+  formData.append("Phone", Phone || "");
+  formData.append("Dob", Dob || "");
+  formData.append("Verified", "");
+  formData.append("Address", Address);
+  formData.append("aadharFront", AdharFront || "");
+  formData.append("aadharBack", AdharBack || "");
 
   try {
     const response = await axios.post(
-      "https://api.weprettify.com/APIs/APIs.asmx/Register",
+      "https://api.weprettify.com/APIs/APIs.asmx/RegisterVendors",
       formData,
       {
         headers: {

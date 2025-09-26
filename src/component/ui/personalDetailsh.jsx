@@ -12,11 +12,11 @@ const PersonalDetails = () => {
 
   // Mark which fields are editable
   const fields = [
-    { label: "Name", key: "Fullname", editable: true },
-    { label: "Mobile No.", key: "PhoneNumber", editable: false }, // <-- not editable
-    { label: "Email Id", key: "Email", editable: true },
+    { label: "Name", key: "fullname", editable: true },
+    { label: "Mobile No.", key: "phoneNumber", editable: false },
+    { label: "Email Id", key: "email", editable: true },
     { label: "Gender", key: "Gender", editable: true },
-    { label: "Date of Birth", key: "DOB", editable: true },
+    { label: "Date of Birth", key: "dob", editable: true },
   ];
 
   useEffect(() => {

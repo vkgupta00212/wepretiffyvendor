@@ -10,10 +10,10 @@ class GetTransactionModel {
   }
   static fromJson(json) {
     return new GetTransactionModel(
-      json.id || 0,
-      json.Transactionid || "",
-      json.TransactionAmt || "",
-      json.DateTim || "",
+      json.ID || 0,
+      json.TransactionID || "",
+      json.Amount || "",
+      json.Dates || "",
       json.Phone || ""
     );
   }
@@ -26,7 +26,7 @@ const GetTransaction = async (phone) => {
 
   try {
     const response = await axios.post(
-      "https://api.weprettify.com/APIs/APIs.asmx/GetTransactions",
+      "https://api.weprettify.com/APIs/APIs.asmx/ShowTransactionVendor",
       formData,
       { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
     );

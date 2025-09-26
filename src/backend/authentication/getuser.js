@@ -1,25 +1,36 @@
 import axios from "axios";
 
 class GetUserModel {
-  constructor(id, Image, Fullname, PhoneNumber, Email, Gender, DOB) {
+  constructor(
+    id,
+    fullname,
+    email,
+    phoneNumber,
+    dob,
+    verified,
+    aadharFront,
+    aadharBack
+  ) {
     this.id = id;
-    this.Image = Image;
-    this.Fullname = Fullname;
-    this.PhoneNumber = PhoneNumber;
-    this.Email = Email;
-    this.Gender = Gender;
-    this.DOB = DOB;
+    this.fullname = fullname;
+    this.email = email;
+    this.phoneNumber = phoneNumber;
+    this.dob = dob;
+    this.verified = verified;
+    this.aadharFront = aadharFront;
+    this.aadharBack = aadharBack;
   }
 
   static fromJson(json) {
     return new GetUserModel(
-      json.id || 0,
-      json.Image || "",
-      json.Fullname || "",
-      json.PhoneNumber || "",
+      json.ID || 0,
+      json.FullName || "",
       json.Email || "",
-      json.Gender || "",
-      json.DOB || ""
+      json.Phone || "",
+      json.Dob || "",
+      json.Verified || "",
+      json.aadharFront || "",
+      json.aadharBack || ""
     );
   }
 }
@@ -31,7 +42,7 @@ const GetUser = async (phone) => {
 
   try {
     const response = await axios.post(
-      "https://api.weprettify.com/APIs/APIs.asmx/GetProfile",
+      "https://api.weprettify.com/APIs/APIs.asmx/ShowVendorProfile",
       formData,
       {
         headers: {

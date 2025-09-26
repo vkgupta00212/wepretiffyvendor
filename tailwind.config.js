@@ -2,13 +2,9 @@
 const animatePlugin = require("tailwindcss-animate");
 const scrollbarHide = require("tailwind-scrollbar-hide");
 
-
 module.exports = {
   darkMode: "class",
-  content: [
-    "./index.html",
-    "./src/**/*.{js,jsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     container: {
       center: true,
@@ -116,6 +112,12 @@ module.exports = {
           "0%": { transform: "scale(1)" },
           "100%": { transform: "scale(1.05)" },
         },
+        // 🔹 New gradient animation
+        gradientMove: {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -123,8 +125,10 @@ module.exports = {
         float: "float 3s ease-in-out infinite",
         glow: "glow 2s ease-in-out infinite",
         "scale-gentle": "scale-gentle 0.3s ease-out",
+        // 🔹 New gradient animation utility
+        gradientMove: "gradientMove 4s ease infinite",
       },
     },
   },
-  plugins: [animatePlugin,  require("tailwind-scrollbar-hide")],
+  plugins: [animatePlugin, scrollbarHide],
 };
