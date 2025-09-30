@@ -4,6 +4,7 @@ import { X, Clock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import RegisterUser from "../../backend/authentication/register";
 import GetUser from "../../backend/authentication/getuser";
+import colors from "../core/constant";
 
 const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState({ width: undefined });
@@ -106,6 +107,7 @@ const OtpVerification = ({ onClose, onVerify }) => {
     if (!isOtpComplete) return;
     const code = otp.join("");
 
+    // OTP validation
     if (code !== "123456") {
       alert("Invalid OTP");
       return;
@@ -114,22 +116,23 @@ const OtpVerification = ({ onClose, onVerify }) => {
     onVerify && onVerify(code);
 
     try {
+      // Fetch user data
       const userData = await GetUser(phone);
 
-      if (userData && userData.length > 0) {
-        console.log("User already registered");
-      } else {
-        await RegisterUser(phone);
-        console.log("Registration successful");
-      }
-
+      // Save login info
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("userPhone", phone);
 
-      alert("✅ Login successful!");
-      // window.location.href = "/";
-      navigate("/register");
-      // Close modal if using popup
+      // Check if fullname exists
+      if (userData.length > 0 && userData[0].fullname) {
+        alert("✅ Welcome back, " + userData[0].fullname + "!");
+        navigate("/");
+        window.location.reload();
+      } else {
+        alert("Please complete your registration");
+        navigate("/register");
+      }
+
       onClose && onClose();
     } catch (error) {
       console.error("Error during verification:", error);
@@ -240,10 +243,10 @@ const OtpVerification = ({ onClose, onVerify }) => {
             <button
               onClick={handleSubmit}
               disabled={!isOtpComplete}
-              className={`w-full py-3 rounded-lg font-semibold transition ${
+              className={`w-full py-3 rounded-lg font-semibold transition-all ${
                 isOtpComplete
-                  ? "bg-indigo-600 text-white hover:bg-indigo-700"
-                  : "bg-gray-300 text-gray-500"
+                  ? `bg-gradient-to-r ${colors.primaryFrom} ${colors.primaryTo} ${colors.textWhite} ${colors.hoverFrom} ${colors.hoverTo} hover:cursor-pointer`
+                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
               }`}
             >
               Verify
@@ -319,10 +322,10 @@ const OtpVerification = ({ onClose, onVerify }) => {
             <button
               onClick={handleSubmit}
               disabled={!isOtpComplete}
-              className={`w-full py-3 rounded-lg font-semibold transition ${
+              className={`w-full py-3 rounded-lg font-semibold transition-all ${
                 isOtpComplete
-                  ? "bg-indigo-600 text-white hover:bg-indigo-700"
-                  : "bg-gray-300 text-gray-500"
+                  ? `bg-gradient-to-r ${colors.primaryFrom} ${colors.primaryTo} ${colors.textWhite} ${colors.hoverFrom} ${colors.hoverTo} hover:cursor-pointer`
+                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
               }`}
             >
               Verify

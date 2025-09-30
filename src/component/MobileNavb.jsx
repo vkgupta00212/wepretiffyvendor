@@ -16,29 +16,7 @@ const navItems = [
     component: <Home />,
     notification: false,
   },
-  {
-    label: "Skin Analyzer",
-    icon: (
-      <span className="text-[20px] transition-all duration-300 group-hover:scale-110">
-        💄
-      </span>
-    ),
-    component: <SkinAnalyzer />,
-    notification: false,
-  },
-  {
-    label: "Products",
-    icon: (
-      <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110">
-        <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
-          <rect x="1" y="4" width="14" height="10" fill="#6b7280" />
-          <rect x="3" y="2" width="10" height="3" fill="#ffffff" />
-        </svg>
-      </div>
-    ),
-    component: <ProductScreen />,
-    notification: true,
-  },
+
   {
     label: "Profile",
     icon: (

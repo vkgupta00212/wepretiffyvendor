@@ -186,6 +186,7 @@ const UserProfile = () => {
     localStorage.removeItem("isLoggedIn");
     setShowMenu(false);
     navigate("/");
+    window.location.reload();
   };
 
   const handleLoginClick = () => {

@@ -98,6 +98,7 @@ const Navigation = () => {
     localStorage.removeItem("userPhone");
     setIsLoggedIn(false);
     navigate("/");
+    window.location.reload();
   };
 
   // Handle login button click with delay
