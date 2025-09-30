@@ -18,6 +18,7 @@ const RegisterUser = async (
   formData.append("Dob", Dob || "");
   formData.append("Verified", "");
   formData.append("Address", Address);
+  formData.append("VenImg", "");
   formData.append("aadharFront", AdharFront || "");
   formData.append("aadharBack", AdharBack || "");
 
